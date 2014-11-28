@@ -6,7 +6,7 @@ require 'karamzin/version'
 Gem::Specification.new do |spec|
   spec.name          = "karamzin"
   spec.version       = Karamzin::VERSION
-  spec.authors       = ["pavel"]
+  spec.authors       = ["Pavel Kalashnikov"]
   spec.email         = ["kalashnikovisme@gmail.com"]
   spec.summary       = %q{Вставляет букву Ё там, где она нужна.}
   spec.description   = %q{Принимает на вход строку и возвращает строку с проставленной буквой Ё именно в тех словах, где она нужна.}
@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.metadata = { "issue_tracker" => "https://github.com/kalashnikovisme/karamzin/issues" }
   spec.post_install_message = "Карамзин доволен тобой!:)"
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = `git ls-files`.split("\n")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
