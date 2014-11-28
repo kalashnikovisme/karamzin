@@ -1,5 +1,6 @@
 require "karamzin/version"
 
 module Karamzin
-  # Your code goes here...
+  def insert(str)
+  end
 end
