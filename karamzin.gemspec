@@ -8,10 +8,13 @@ Gem::Specification.new do |spec|
   spec.version       = Karamzin::VERSION
   spec.authors       = ["pavel"]
   spec.email         = ["kalashnikovisme@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Вставляет букву Ё там, где она нужна.}
+  spec.description   = %q{Принимает на вход строку и возвращает строку с проставленной буквой Ё именно в тех словах, где она нужна.}
+  spec.homepage      = "https://github.com/kalashnikovisme/karamzin"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 2.0.0'
+  spec.metadata = { "issue_tracker" => "https://github.com/kalashnikovisme/karamzin/issues" }
+  spec.post_install_message = "Карамзин доволен тобой!:)"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
