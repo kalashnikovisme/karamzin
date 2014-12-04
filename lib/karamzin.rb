@@ -5,14 +5,13 @@ require 'yaml'
 module Karamzin
   include Config
 
-  class String
-    def words
-      scan(/\w[\w\'\-]*/)
-    end
+  def insert(str)
+    #dictionary = YamlLoader.yaml_object 'dictionaryE'
+    words = str.split
+    filter_words words
   end
 
-  def insert(str)
-    dictionary = YamlLoader.yaml_object 'dictionaryE'
-    puts str.scan
+  def filter_words(words)
+    words.map { |w| w[/[а-яА-ЯЁё\-]+/] }.compact
   end
 end
