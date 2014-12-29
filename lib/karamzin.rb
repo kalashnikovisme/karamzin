@@ -24,7 +24,7 @@ module Karamzin
     paste_words.uniq!
     paste_words.each do |word|
       index = str.index word[:replace_word]
-      str.sub! str[index, index + word[:replace_word].length], equate_words_register(word[:replace_word], word[:paste_word])
+      str.sub! str[index..index + word[:replace_word].length - 1], equate_words_register(word[:replace_word], word[:paste_word])
     end
     str
   end
@@ -38,7 +38,11 @@ module Karamzin
       wordE.split('').each_with_index do |c, i|
         unless wordE[i] == word[i]
           if word[i] == 'ё'
-            word[i] = 'Ё'
+            if wordE[i] == 'Е'
+              word[i] = 'Ё'
+            else
+              next
+            end
           else
             word[i] = word[i].mb_chars.uppercase.wrapped_string
           end
