@@ -21,7 +21,7 @@ module Karamzin
     paste_words.uniq!
     paste_words.each do |word|
       index = str.index word[:replace_word]
-      str.sub! str[index..index + word[:replace_word].length - 1], equate_words_register(word[:replace_word], word[:paste_word])
+      str.gsub! str[index..index + word[:replace_word].length - 1], equate_words_register(word[:replace_word], word[:paste_word])
     end
     str
   end
