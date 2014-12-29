@@ -5,7 +5,7 @@ require 'yaml'
 module Karamzin
   include Config
 
-  def initialize_dictionaries
+  def self.initialize_dictionaries
     @dictionaryE = YamlLoader.yaml_object('dictionaryE')[:words]
     @dictionary = YamlLoader.yaml_object('dictionary')[:words]
   end
