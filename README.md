@@ -1,6 +1,5 @@
 # Karamzin
 
-TODO: Write a gem description
 
 ## Installation
 
@@ -18,7 +17,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+#=> Karamzin.initialize_dictionaries
+#=> Karamzin.insert 'В лесу родилась елочка!'
+```
 
 ## Contributing
 
