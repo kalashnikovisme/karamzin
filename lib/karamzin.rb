@@ -5,12 +5,9 @@ require 'yaml'
 module Karamzin
   include Config
 
-  def self.initialize_dictionaries
+  def insert(str)
     @dictionaryE = YamlLoader.yaml_object('dictionaryE')[:words]
     @dictionary = YamlLoader.yaml_object('dictionary')[:words]
-  end
-
-  def insert(str)
     words = filter_words str.split
     paste_words = []
     words.each_with_index do |word, i|
