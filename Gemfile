@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in karamzin.gemspec
 gemspec
+gem 'pry'
+gem 'tconsole', git: "git://github.com/ulmic/tconsole", branch: 'rails4'
+gem 'coveralls', require: false
+gem 'simplecov'
+gem 'minitest'
+gem 'activesupport'
