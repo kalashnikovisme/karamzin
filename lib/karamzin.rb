@@ -9,12 +9,21 @@ module Karamzin
     @dictionaryE = YamlLoader.yaml_object('dictionaryE')[:words]
     @dictionary = YamlLoader.yaml_object('dictionary')[:words]
     words = filter_words str.split
+    paste_words = []
     words.each_with_index do |word, i|
       if is_in_dictionary word
-        words[i] = @dictionary[is_in_dictionary(word)]
+        paste_words << {
+          replace_word: word,
+          paste_word: @dictionary[is_in_dictionary(word)]
+        }
       end
     end
-    words
+    paste_words.uniq!
+    paste_words.each do |word|
+      index = str.index word[:replace_word]
+      str.sub! str[index, index + word[:replace_word].length], word[:paste_word]
+    end
+    binding.pry
   end
 
   def is_in_dictionary(word)
