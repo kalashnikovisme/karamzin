@@ -4,6 +4,6 @@ include Karamzin
 
 class KaramzinTest < TestCase
   def test_insert
-    assert_equal 'Ёлки палки', Karamzin.insert('Елки палки')
+    assert_equal 'Ёлки, палки', Karamzin.insert('Елки, палки')
   end
 end

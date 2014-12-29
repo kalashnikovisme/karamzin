@@ -21,13 +21,28 @@ module Karamzin
     paste_words.uniq!
     paste_words.each do |word|
       index = str.index word[:replace_word]
-      str.sub! str[index, index + word[:replace_word].length], word[:paste_word]
+      str.sub! str[index, index + word[:replace_word].length], equate_words_register(word[:replace_word], word[:paste_word])
     end
-    binding.pry
+    str
   end
 
   def is_in_dictionary(word)
     @dictionaryE.index word.mb_chars.downcase.wrapped_string
+  end
+
+  def equate_words_register(wordE, word)
+    unless wordE == word
+      wordE.split('').each_with_index do |c, i|
+        unless wordE[i] == word[i]
+          if word[i] == 'ё'
+            word[i] = 'Ё'
+          else
+            word[i] = word[i].mb_chars.uppercase.wrapped_string
+          end
+        end
+      end
+    end
+    word
   end
 
   def filter_words(words)
