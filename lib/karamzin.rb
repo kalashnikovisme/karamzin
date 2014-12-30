@@ -1,7 +1,7 @@
 require 'karamzin/version'
 require 'karamzin/config'
+require 'karamzin/dictionary'
 require 'yaml'
-#require 'active_support/core_ext'
 
 module Karamzin
   include Config
@@ -44,23 +44,8 @@ module Karamzin
   end
 
   def make_dictionaries
-    @dictionary = make_dictionary 'dictionary'
-    @dictionaryE = make_dictionary 'dictionaryE'
-  end
-
-  def make_dictionary(name)
-    dictionary = YamlLoader.yaml_object(name)[:words]
-    variable = {}
-    dictionary.each do |word|
-      if word[0] == 'ё'
-        variable['е'] ||= []
-        variable['е'] << word
-      else
-        variable[word[0]] ||= []
-        variable[word[0]] << word
-      end
-    end
-    variable
+    @dictionary = Dictionary.new 'dictionary'
+    @dictionaryE = Dictionary.new 'dictionaryE'
   end
 
   def equate_words_register(wordE, word)
