@@ -7,3 +7,4 @@ gem 'coveralls', require: false
 gem 'simplecov'
 gem 'minitest'
 gem 'activesupport'
+gem 'unicode_utils'
