@@ -1,21 +1,30 @@
+require 'active_support'
 require 'karamzin/version'
 require 'karamzin/config'
 require 'karamzin/dictionary'
+require 'karamzin/words_helper'
 require 'yaml'
 
 module Karamzin
   include Config
+  include WordsHelper
+
+  E_LETTER = 'е'
+  YO_LETTER = 'ё'
+  BIG_E_LETTER = 'Е'
+  BIG_YO_LETTER = 'Ё'
 
   def insert(str)
-    make_dictionaries
+    @dictionary = Dictionary.new 'dictionary'
     words = filter_words str.split
     paste_words = []
     words.each do |word|
-      index_in_dictionary = is_in_dictionary word
+      index_in_dictionary = @dictionary.is_in_dictionary word
       if index_in_dictionary
+        word_with_yo = make_word_with_yo(word, index_in_dictionary)
         paste_words << {
           replace_word: word,
-          paste_word: @dictionary[first_letter_in(word)][index_in_dictionary]
+          paste_word: word_with_yo
         }
       end
     end
@@ -27,47 +36,15 @@ module Karamzin
     str
   end
 
-  def first_letter_in(word)
-    letter = word[0].mb_chars.downcase.to_s
-    letter == 'ё' ?  'е' : letter
-  end
-
-  def is_in_dictionary(word)
-    if @dictionaryE[word[0].mb_chars.downcase.to_s]
-      if word[0] == 'ё'
-        word[0] = 'e'
-        @dictionaryE['е'].index word.mb_chars.downcase.wrapped_string
-      else
-        @dictionaryE[word[0].mb_chars.downcase.to_s].index word.mb_chars.downcase.wrapped_string
-      end
+  def make_word_with_yo(word, index_in_dictionary)
+    word_with_yo = @dictionary[first_letter_in(word)][index_in_dictionary]
+    index = @dictionary.indexes[first_letter_in(word)][index_in_dictionary].to_i
+    letter = word[index]
+    if letter == E_LETTER
+      word_with_yo[index] = YO_LETTER
+    elsif letter == BIG_E_LETTER
+      word_with_yo[index] = BIG_YO_LETTER
     end
-  end
-
-  def make_dictionaries
-    @dictionary = Dictionary.new 'dictionary'
-    @dictionaryE = Dictionary.new 'dictionaryE'
-  end
-
-  def equate_words_register(wordE, word)
-    unless wordE == word
-      wordE.split('').each_with_index do |c, i|
-        unless wordE[i] == word[i]
-          if word[i] == 'ё'
-            if wordE[i] == 'Е'
-              word[i] = 'Ё'
-            else
-              next
-            end
-          else
-            word[i] = word[i].mb_chars.uppercase.wrapped_string
-          end
-        end
-      end
-    end
-    word
-  end
-
-  def filter_words(words)
-    words.map { |w| w[/[а-яА-ЯЁё\-]+/] }.compact
+    word_with_yo
   end
 end
