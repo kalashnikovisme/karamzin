@@ -17,22 +17,14 @@ module Karamzin
   def insert(str)
     @dictionary = Dictionary.new 'dictionary'
     words = filter_words str.split
-    paste_words = []
     words.each do |word|
       index_in_dictionary = @dictionary.is_in_dictionary word
       if index_in_dictionary
         word_with_yo = make_word_with_yo(word, index_in_dictionary)
-        paste_words << {
-          replace_word: word,
-          paste_word: word_with_yo
-        }
+        index = str.index word
+        next if index.nil?
+        str.gsub! str[index..(index + word.length - 1)], equate_words_register(word, word_with_yo)
       end
-    end
-    paste_words.uniq!
-    paste_words.each do |word|
-      index = str.index word[:replace_word]
-      next if index.nil?
-      str.gsub! str[index..(index + word[:replace_word].length - 1)], equate_words_register(word[:replace_word], word[:paste_word])
     end
     str
   end

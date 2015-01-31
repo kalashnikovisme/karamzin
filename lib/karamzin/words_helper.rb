@@ -1,7 +1,7 @@
 module Karamzin
   module WordsHelper
     def filter_words(words)
-      words.map { |w| w[/[а-яА-ЯЁё\-]+[е|Е]+[а-яА-ЯЁё\-]/] }.compact
+      words.map { |w| w[/[а-яА-ЯЁё\-]*[еЕ][а-яА-ЯЁё\-]*/] }.compact
     end
 
     def equate_words_register(wordE, word)

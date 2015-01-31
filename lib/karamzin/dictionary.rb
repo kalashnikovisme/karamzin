@@ -27,10 +27,7 @@ module Karamzin
 
     def is_in_dictionary(word)
       if @dictionary[word[0].mb_chars.downcase.to_s]
-        if word[0] == YO_LETTER
-          word[0] = E_LETTER
-          @dictionary[E_LETTER].index word.mb_chars.downcase.to_s
-        else
+        unless word[0] == YO_LETTER
           @dictionary[word[0].mb_chars.downcase.to_s].index word.mb_chars.downcase.to_s
         end
       end
