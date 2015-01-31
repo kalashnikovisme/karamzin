@@ -16,18 +16,11 @@ module Karamzin
       words = YamlLoader.yaml_object(name)[:words]
       variable = {}
       @indexes = {}
-      words.each do |word|
-        if word[0] == YO_LETTER
-          variable[E_LETTER] ||= []
-          variable[E_LETTER] << word.split(' ')[0]
-          @indexes[E_LETTER] ||= []
-          @indexes[E_LETTER] << word.split(' ')[1]
-        else
-          variable[word[0]] ||= []
-          variable[word[0]] << word.split(' ')[0]
-          @indexes[word[0]] ||= []
-          @indexes[word[0]] << word.split(' ')[1]
-        end
+      words.map do |word|
+        variable[word[0]] ||= []
+        variable[word[0]] << word.split(' ')[0]
+        @indexes[word[0]] ||= []
+        @indexes[word[0]] << word.split(' ')[1]
       end
       variable
     end

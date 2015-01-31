@@ -6,8 +6,8 @@ require 'karamzin/words_helper'
 require 'yaml'
 
 module Karamzin
-  include Config
   include WordsHelper
+  include Config
 
   E_LETTER = 'е'
   YO_LETTER = 'ё'
@@ -31,7 +31,8 @@ module Karamzin
     paste_words.uniq!
     paste_words.each do |word|
       index = str.index word[:replace_word]
-      str.gsub! str[index..index + word[:replace_word].length - 1], equate_words_register(word[:replace_word], word[:paste_word])
+      next if index.nil?
+      str.gsub! str[index..(index + word[:replace_word].length - 1)], equate_words_register(word[:replace_word], word[:paste_word])
     end
     str
   end
