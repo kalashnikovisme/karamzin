@@ -6,8 +6,8 @@ require 'karamzin/words_helper'
 require 'yaml'
 
 module Karamzin
-  include WordsHelper
   include Config
+  include WordsHelper
 
   E_LETTER = 'е'
   YO_LETTER = 'ё'

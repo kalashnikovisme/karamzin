@@ -1,5 +1,6 @@
 module Karamzin
   class Dictionary
+    include Config
     def initialize(name)
       @dictionary = make_dictionary name
     end
