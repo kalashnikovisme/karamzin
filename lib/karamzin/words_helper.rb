@@ -1,3 +1,5 @@
+require 'unicode_utils'
+
 module Karamzin
   module WordsHelper
     def filter_words(words)
