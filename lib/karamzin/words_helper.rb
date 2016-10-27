@@ -15,7 +15,7 @@ module Karamzin
                 next
               end
             else
-              word[i] = ::UnicodeUtils.upcase word[i]
+              word[i] = UnicodeUtils.upcase word[i]
             end
           end
         end
